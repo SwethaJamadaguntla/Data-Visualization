@@ -1,0 +1,167 @@
+# To know current directory
+pwd
+
+# To change directory
+import os
+os.chdir('C:\\Users\\Ravjeet\\Desktop\\DBS\\Data Visualisation\\Education-in-India')
+
+# To once again check the directory
+pwd
+
+# To import pandas
+import pandas as pd
+
+# To read csv file
+ed = pd.read_csv('2015_16_Statewise_Secondary.csv')
+
+# To print csv file
+print (ed)
+
+# To print first 6 columns
+print (ed.head(6))
+
+# To drop multiple columns
+# axis =1, means columns will get deleted
+# inplace = True, means changes are effected in same data frame
+ed.drop(['sc_population','st_population','blkcd','clusters','sch_1','sch_2','sch_3','sch_4','sch_5','sch_6','sch_7'],
+axis=1, inplace=True)
+
+ed.drop(['sch_r_1','sch_r_2','sch_r_3','sch_r_4','sch_r_5','sch_r_6','sch_r_7'], axis=1, inplace = True)
+ed.drop(['sch_u_1','sch_u_2','sch_u_3','sch_u_4','sch_u_5','sch_u_6','sch_u_7'], axis =1, inplace = True)
+ed.drop(['enr_1','enr_2','enr_3','enr_4','enr_5','enr_6','enr_7'], axis=1, inplace = True)
+ed.drop(['enr_r_1','enr_r_2','enr_r_3','enr_r_4','enr_r_5','enr_r_6','enr_r_7'], axis =1, inplace = True)
+ed.drop(['tch_1','tch_2','tch_3','tch_4','tch_5','tch_6','tch_7'], axis=1, inplace= True)
+ed.drop(['tch_r_1','tch_r_2','tch_r_3','tch_r_4','tch_r_5','tch_r_6','tch_r_7'], axis=1, inplace =True)
+ed.drop(['tch_u_1','tch_u_2','tch_u_3','tch_u_4','tch_u_5','tch_u_6','tch_u_7'], axis=1, inplace = True)
+ed.drop(['sing_cls_sch_1','sing_cls_sch_2','sing_cls_sch_3','sing_cls_sch_4','sing_cls_sch_5','sing_cls_sch_6','sing_cls_sch_7'],axis=1, inplace = True)
+ed.drop(['sing_tch_sch_1','sing_tch_sch_2','sing_tch_sch_3','sing_tch_sch_4','sing_tch_sch_5','sing_tch_sch_6','sing_tch_sch_7'], axis=1, inplace=True)
+ed.drop(['bldg_1','bldg_2','bldg_3','bldg_4','bldg_5','bldg_6','bldg_7','bldg_all'], axis =1, inplace = True)
+ed.drop(['girls_toilet_1','girls_toilet_2','girls_toilet_3','girls_toilet_4','girls_toilet_5','girls_toilet_6','girls_toilet_7'], axis=1, inplace = True)
+ed.drop(['boys_toilet_1','boys_toilet_2','boys_toilet_3','boys_toilet_4','boys_toilet_5','boys_toilet_6','boys_toilet_7'], axis=1, inplace = True)
+ed.drop(['gsch_1','gsch_2','gsch_3','gsch_4','gsch_5','gsch_6','gsch_7'], axis =1 , inplace = True)
+ed.drop(['bsch_1','bsch_2','bsch_3','bsch_4','bsch_5','bsch_6','bsch_7'], axis =1 , inplace = True)
+
+# To view column names
+ed.columns
+
+# To change columns name
+ed.rename(columns={'ac_year':'Academic_Year','statname':'State_Name','area_sqkm':'Area_SqKm','tot_population':'Total_Population'}, inplace=True)
+ed.rename(columns={'urban_population':'Urban_Population','grwoth_rate':'Growth_Rate','sexratio':'Sex_Ratio','literacy_rate':'Literacy_Rate'}, inplace = True)
+ed.rename(columns={'male_literacy_rate':'Male_Literacy','female_literacy_rate':'Female_Literacy','distcd':'Number_of_Districts'}, inplace=True)
+ed.rename(columns={'villages':'Villages','schools':'Number_of_Schools','enr_all':'Enrollment_in_Schools','enr_r_all':'Enrollment_Rural_Schools'}, inplace=True)
+ed.rename(columns={'enr_u_all':'Enrollment_Urban_Schools','tch_all':'Number_of_Teachers','tch_r_all':'Teachers_Rural_Schools'}, inplace=True)
+ed.rename(columns={'statcd':'State_Code', 'library_all' : 'Library','librarian_all' :'Librarian','cwsn_sch_all':'CWSN_School','lab_asst_all' : 'Lab_Assistant'}, inplace = True)
+ed.rename(columns={'tch_u_all':'Teachers_Urban_Schools','sing_cls_sch_all':'Schools_Single_Classroom','sing_tch_sch_all':'Single_Teacher_School'}, inplace=True)
+ed.rename(columns={'hostel_boys_all':'Boys_Hostel','hostel_girls_all':'Girls_Hostel','internet_all':'Schools_Internet','ict_lab_all':'Schools_ICT_Lab'}, inplace = True)
+ed.rename(columns={'pground_all':'Playground','medchk_all':'Medical_Checkup','smdc_all':'SMDC','pta_all':'PTA','cls_all':'Classrooms','tchf_all':'Female_Teachers'}, inplace=True)
+ed.rename(columns={'enrg_all':'Girls_Enrollment','schlabphy':'Phyiscs_Lab','schlabchem':'Chemistry_Lab','schlabbio':'Biology_Lab','schlabcomputer':'Computer_Lab',
+'schlabmath':'Maths_Lab','schlablang':'Language_Lab'}, inplace=True)
+ed.rename(columns={'schlabgeo':'Geography_Lab','schlabpsyc':'Psychology_Lab','schlabhsci':'Social_Science_Lab'},inplace=True)
+
+
+# To sum the number of professional female teachers.
+ed['Female_Professional_Teacher'] = ed['tchbtt_f'] + ed['tchbed_f'] + ed['tchmed_f'] + ed['tchoth_f'] + ed['tchse_f'] + ed['tchnr_f']
+
+
+# To drop unwanted professional female teachers columns
+ed.drop(columns=['tchbtt_f','tchbed_f','tchmed_f','tchoth_f','tchse_f','tchnr_f'], axis = 1, inplace = True)
+
+# To sum the number of professional male teachers
+ed['Male_Professional_Teacher'] = ed['tchbtt_m']+ed['tchbed_m']+ed['tchmed_m']+ed['tchoth_m']+ed['tchse_m']+ed['tchnr_m']
+
+# To drop unwanted professional male teacher columns
+ed.drop(columns=['tchbtt_m','tchbed_m','tchmed_m','tchoth_m','tchse_m','tchnr_m'], axis =1, inplace = True)
+
+# To sum the number of male regular teacher columns
+ed['Male_Regular_Teacher']=ed['tchug_r_m']+ed['tchgrad_r_m']+ed['tchpg_r_m']+ed['tchphd_r_m']+ed['tchpd_r_m']+ed['tchnr_r_m']
+
+# To drop unwanted male regular teacher columns
+ed.drop(columns=['tchug_r_m','tchug_r_m','tchpg_r_m','tchphd_r_m','tchpd_r_m','tchnr_r_m'], axis =1, inplace = True)
+
+# To sum the number of female regular teacher columns
+ed['Female_Regular_Teacher']=ed['tchug_r_f']+ed['tchgrad_r_f']+ed['tchpg_r_f']+ed['tchphd_r_f']+ed['tchpd_r_f']+ed['tchnr_r_f']
+
+# To drop unwanted female regular teacher columns
+ed.drop(columns=['tchug_r_f','tchgrad_r_f','tchpg_r_f','tchphd_r_f','tchpd_r_f','tchnr_r_f'], axis=1, inplace = True)
+
+# To drop unwanted regular teacher columns
+ed.drop(columns=['tchug_r_nr','tchgrad_r_nr','tchpg_r_nr','tchphd_r_nr','tchpd_r_nr','tchnr_r_nr'], axis =1, inplace = True)
+
+# To sum the number of male contract teacher columns
+ed['Male_Contract_Teacher']=ed['tchug_p_m']+ed['tchgrad_p_m']+ed['tchpg_p_m']+ed['tchphd_p_m']+ed['tchpd_p_m']+ed['tchnr_p_m']
+
+# To drop unwanted male contract teacher columns
+ed.drop(columns=['tchug_p_m','tchgrad_p_m','tchpg_p_m','tchphd_p_m','tchpd_p_m','tchnr_p_m'], axis =1, inplace = True)
+
+# To sum the number of female contract teacher columns
+ed['Feamle_Contract_Teacher']=ed['tchug_p_f']+ed['tchgrad_p_f']+ed['tchpg_p_f']+ed['tchphd_p_f']+ed['tchpd_p_f']+ed['tchnr_p_f']
+
+# To drop unwanted female contract teacher columns
+ed.drop(columns=['tchug_p_f','tchgrad_p_f','tchpg_p_f','tchphd_p_f','tchpd_p_f','tchnr_p_f'], axis=1, inplace = True)
+
+# To sum the number of boys enrollment columns
+ed['Boys_Enrollment']=ed['enrc8_b']+ed['enrc9_b']+ed['enrc10_b']+ed['enrc11_b']+ed['enrc12_b']
+
+# To drop the unwanted boys enrollment columns
+ed.drop(columns=['enrc8_b','enrc9_b','enrc10_b','enrc11_b','enrc12_b'], axis =1, inplace = True)
+
+# To sum the number of boys repeater columns
+ed['Boys_Repeaters']=ed['repc8_b']+ed['repc9_b']+ed['repc10_b']+ed['repc11_b']+ed['repc12_b']
+
+# To drop unwanted boys repeater columns
+ed.drop(columns=['repc8_b','repc9_b','repc10_b','repc11_b','repc12_b'], axis =1, inplace = True)
+
+# To sum the number of girls repeater columns
+ed['Girls_Repeaters']=ed['repc8_g']+ed['repc9_g']+ed['repc10_g']+ed['repc11_g']+ed['repc12_g']
+
+# To drop unwanted girls repeater columns
+ed.drop(columns=['repc8_g','repc9_g','repc10_g','repc11_g','repc12_g'], axis=1, inplace= True)
+
+# To sum  cwsn boys columns
+ed['Boys_CWSN']=ed['cwsnc8_b']+ed['cwsnc9_b']+ed['cwsnc10_b']+ed['cwsnc11_b']+ed['cwsnc12_b']
+
+# To sum cwsn girls columns
+ed['Girls_CWSN']=ed['cwsnc8_g']+ed['cwsnc9_g']+ed['cwsnc10_g']+ed['cwsnc11_g']+ed['cwsnc12_g']
+
+# To drop unwanted cwsn boys columns
+ed.drop(columns=['cwsnc8_b','cwsnc9_b','cwsnc10_b','cwsnc11_b','cwsnc12_b'], axis = 1, inplace = True)
+
+# To drop unwanted cwsn girls columns
+ed.drop(columns=['cwsnc8_g','cwsnc9_g','cwsnc10_g','cwsnc11_g','cwsnc12_g'], axis =1, inplace = True)
+
+# To sum Arts students
+ed['Arts_Students']=ed['arts_c11_b']+ed['arts_c11_g']+ed['arts_c12_b']+ed['arts_c12_g']
+
+# To sum Science students
+ed['Science_Students']=ed['sci_c11_b']+ed['sci_c11_g']+ed['sci_c12_b']+ed['sci_c12_g']
+
+# To sum Commerce students
+ed['Commerce_Students']=ed['com_c11_b']+ed['com_c11_g']+ed['com_c12_b']+ed['com_c12_g']
+
+# To sum Vocational students
+ed['Vocational_Students']=ed['voc_c11_b']+ed['voc_c11_g']+ed['voc_c12_b']+ed['voc_c12_g']
+
+# To drop unwanted Arts students columns
+ed.drop(columns=['arts_c11_b','arts_c11_g','arts_c12_b','arts_c12_g'], axis =1, inplace = True)
+
+# To drop unwanted Science students columns
+ed.drop(columns=['sci_c11_b','sci_c11_g','sci_c12_b','sci_c12_g'], axis=1, inplace = True)
+
+# To drop unwanted Commerce students columns
+ed.drop(columns=['com_c11_b','com_c11_g','com_c12_b','com_c12_g'], axis =1 , inplace = True)
+
+# To drop unwanted Vocational students columns
+ed.drop(columns=['voc_c11_b','voc_c11_g','voc_c12_b','voc_c12_g'], axis = 1, inplace = True)
+
+# To sum Other students
+ed['Other_Students']=ed['oth_c11_b']+ed['oth_c11_g']+ed['oth_c12_b']+ed['oth_c12_g']
+
+# To save file
+ed.to_csv('school5.csv')
+
+# To fill blank spaces
+ed1 = ed.fillna(0)
+
+# To again save it
+ed1.to_csv('school_state'.csv)
+
